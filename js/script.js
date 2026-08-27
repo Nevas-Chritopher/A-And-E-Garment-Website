@@ -37,6 +37,16 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 
+const zipperStage = document.querySelector(".zipper-open");
+if (zipperStage) {
+  const zipperObserver = new IntersectionObserver((entries, observer) => {
+    if (!entries[0].isIntersecting) return;
+    zipperStage.classList.add("is-open");
+    observer.unobserve(zipperStage);
+  }, { threshold: 0.35 });
+  zipperObserver.observe(zipperStage);
+}
+
 const stats = document.querySelector(".stats");
 if (stats) {
   const counterObserver = new IntersectionObserver((entries, observer) => {
